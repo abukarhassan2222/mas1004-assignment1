@@ -1,0 +1,30 @@
+reading /Users/abukarhassan/Documents/mas1004-assignment1/data/clean
+450 images, 3 classes, read in 5 s
+  kirby_figure             150
+  toothless_dragon_toy     150
+  trafalgar_law_figure     150
+training on 360, testing on 90
+model has 11,178,051 parameters, 1,539 of them will be trained
+epoch   1/10: train_loss 0.9837 train_acc 0.494  test_loss 0.6005 test_acc 0.811
+epoch   2/10: train_loss 0.4997 train_acc 0.878  test_loss 0.3427 test_acc 0.956
+epoch   3/10: train_loss 0.3159 train_acc 0.939  test_loss 0.2436 test_acc 0.933
+epoch   4/10: train_loss 0.2775 train_acc 0.931  test_loss 0.1977 test_acc 0.978
+epoch   5/10: train_loss 0.2189 train_acc 0.972  test_loss 0.1644 test_acc 0.978
+epoch   6/10: train_loss 0.1652 train_acc 0.972  test_loss 0.1393 test_acc 0.989
+epoch   7/10: train_loss 0.1250 train_acc 0.983  test_loss 0.1268 test_acc 0.989
+epoch   8/10: train_loss 0.1526 train_acc 0.978  test_loss 0.1113 test_acc 0.989
+epoch   9/10: train_loss 0.1444 train_acc 0.978  test_loss 0.1153 test_acc 0.978
+epoch  10/10: train_loss 0.1178 train_acc 0.989  test_loss 0.0964 test_acc 0.978
+
+trained in 1.4 minutes
+train accuracy 100.0%
+test  accuracy 97.8%
+wrote /Users/abukarhassan/Documents/mas1004-assignment1/results/frozen_curves.png
+wrote /Users/abukarhassan/Documents/mas1004-assignment1/results/frozen_confusion.png
+worst_examples is not written yet (Problem 5), so there is no frozen_worst.png this time
+wrote /Users/abukarhassan/Documents/mas1004-assignment1/results/frozen_model.pt
+
+One line for your experiment table:
+| frozen | ImageNet | last layer | 10 | 0.001 | 1,539 | 100.0% | 97.8% |
+
+To put this model on your web page: python src/export_web.py --tag frozen

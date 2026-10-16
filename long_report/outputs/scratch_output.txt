@@ -1,0 +1,30 @@
+reading /Users/abukarhassan/Documents/mas1004-assignment1/data/clean
+450 images, 3 classes, read in 6 s
+  kirby_figure             150
+  toothless_dragon_toy     150
+  trafalgar_law_figure     150
+training on 360, testing on 90
+model has 11,178,051 parameters, 11,178,051 of them will be trained
+epoch   1/10: train_loss 0.7318 train_acc 0.689  test_loss 0.6763 test_acc 0.767
+epoch   2/10: train_loss 0.3414 train_acc 0.892  test_loss 0.7272 test_acc 0.789
+epoch   3/10: train_loss 0.1922 train_acc 0.936  test_loss 0.2501 test_acc 0.911
+epoch   4/10: train_loss 0.0952 train_acc 0.972  test_loss 0.1926 test_acc 0.922
+epoch   5/10: train_loss 0.0606 train_acc 0.981  test_loss 0.3016 test_acc 0.900
+epoch   6/10: train_loss 0.0291 train_acc 0.994  test_loss 0.3474 test_acc 0.867
+epoch   7/10: train_loss 0.0298 train_acc 0.994  test_loss 0.4927 test_acc 0.844
+epoch   8/10: train_loss 0.0154 train_acc 0.997  test_loss 0.3645 test_acc 0.889
+epoch   9/10: train_loss 0.0300 train_acc 0.992  test_loss 0.1828 test_acc 0.933
+epoch  10/10: train_loss 0.0093 train_acc 1.000  test_loss 0.2089 test_acc 0.933
+
+trained in 3.2 minutes
+train accuracy 100.0%
+test  accuracy 93.3%
+wrote /Users/abukarhassan/Documents/mas1004-assignment1/results/scratch_curves.png
+wrote /Users/abukarhassan/Documents/mas1004-assignment1/results/scratch_confusion.png
+worst_examples is not written yet (Problem 5), so there is no scratch_worst.png this time
+wrote /Users/abukarhassan/Documents/mas1004-assignment1/results/scratch_model.pt
+
+One line for your experiment table:
+| scratch | random | all layers | 10 | 0.0001 | 11,178,051 | 100.0% | 93.3% |
+
+To put this model on your web page: python src/export_web.py --tag scratch

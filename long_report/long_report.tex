@@ -17,8 +17,8 @@
 \usepackage{mas1004}
 
 \reporttitle{Assignment 1: Long report}
-\studentname{Your name}
-\studentid{Your student ID}
+\studentname{Abukar Hassan}
+\studentid{G20260557}
 
 \begin{document}
 \makeheader
@@ -27,23 +27,45 @@
 \section*{Problem 1. Categories and images}
 
 \subsection*{Why these categories}
-\fillin{Why these categories, and why you care about them.}
+For my three categories I picked toys, specifically a Trafalgar Law Lego piece,
+a sleepy Kirby, and a Toothless keychain. The reason why I picked these toys is
+because they all hold meaning to me. For instance, I picked the Trafalgar Law
+Lego piece because he's my favorite character from the Japanese anime
+``One Piece''. The same could be said for the rest of the toys. They are my
+favorite characters from their respective fields of media. Another reason why I
+picked them is because I recently acquired them during my time here in Korea. I
+took 10 pictures of each toy from different angles and with different
+backgrounds to see how the model will differentiate them.
 
 \subsection*{What I expected the model to use}
-\fillin{What you thought, before training, the model would use to tell them
-apart: shape, colour, texture, background, or something else.}
+One way I believe the model will be able to tell them apart is by using the
+color of the characters because they all have different color ways. As Kirby is
+mostly pink, Toothless is black, Trafalgar Law has a hint of blue which none of
+the others have. Another way it could tell them apart would be by the faces
+since each of the toys have vastly different facial features. Lastly, the model
+could tell them apart by the shape of each of the characters since they all
+look vastly different.
 
 \subsection*{Images per category}
-\fillin{How many images you got for each category.}
+Image counts: Kirby: 150 images found. Toothless: 150 images found. Trafalgar
+Law: 150 images found.
+
+\outputfile{outputs/collect_step2.txt}
 
 % ---------------------------------------------------------------------------
 \section*{Problem 2. Preparing an image}
 
-\sidebyside{figures/prepare_original.jpg}{\fillin{the image as downloaded}}
-           {figures/prepare_result.png}{\fillin{what prepare\_image made of it}}
+\sidebyside{figures/prepare_original.jpg}{the original photo, IMG\_2645}
+           {figures/prepare_result.png}{what prepare\_image made of it}
 
-\fillin{What was cut off, and an image where the crop cut off part of the
-thing you care about.}
+trafalgar\_law\_figure\_IMG\_2645 shows a tall image of my Law LEGO figure.
+Prepare\_image resized the short side of the image to 256, which meant that the
+long side was also scaled with it. This caused Law's hat, part of his face, and
+legs to be cut off due to the photo being too tall. This could cause some
+problems because his hat is iconic and his face is different from the other
+toys. These could be what the model uses to differentiate the toys. Now the
+model can't use his hat, half his face or legs to figure out which toy it is
+based on.
 
 % ---------------------------------------------------------------------------
 \section*{Problem 3. First training runs}
@@ -53,84 +75,183 @@ thing you care about.}
 \toprule
 tag & start & trained & epochs & lr & trainable parameters & train acc. & test acc. \\
 \midrule
-\multicolumn{8}{l}{\fillin{one row per run, as run.py printed it}} \\
+run & ImageNet & all layers & 10 & 0.0001 & 11,178,051 & 100.0\% & 100.0\% \\
+scratch & random & all layers & 10 & 0.0001 & 11,178,051 & 100.0\% & 93.3\% \\
+frozen & ImageNet & last layer & 10 & 0.001 & 1,539 & 100.0\% & 97.8\% \\
+bigLR & ImageNet & all layers & 10 & 0.01 & 11,178,051 & 68.1\% & 70.0\% \\
 \bottomrule
 \end{tabular}
 \end{center}
 
 \picturefile{figures/run_curves.png}
 
-\fillin{Did the loss go down? Did it keep going down, or flatten out?}
+The loss went down sharply during training but then flattened closer to the
+0.00 loss range when it reached 3-4 epochs. Additionally, while the training
+line started high the actual test line started much lower and closer to where
+the training line started to flatten out.
 
-\fillin{The gap between train and test accuracy, and what it means.}
+Interestingly enough for the first training run there wasn't a gap between the
+training (100\%) and the test (100\%). This means that there wasn't a big
+difference between the two. For instance many of the photos that the web search
+generated had a couple duplicates and pictures from the same angle which could
+have contributed to the high test result.
 
 \begin{center}\picturefile[0.5\linewidth]{figures/run_confusion.png}\end{center}
 
-\fillin{Which two categories it mixes up most, and whether that surprised you.}
+For the main run's confusion matrix the model did not mix any of the
+categories it got 100\% on both the training and test. This did not surprise me
+since the categories look pretty different from each other. So I looked at
+random start and found some mistakes, for example during the random test the
+model had 3 mistakes where it confused Toothless for Law. This surprised me
+because they do not look alike at all. I think that the model confused the two
+because most of the pictures for both images have a white background and the
+biggest thing that I believe contributed to the confusion is Law's clothing
+color which the model could have thought was Toothless because both are black.
 
-\fillin{How far apart the test accuracies are, starting from ImageNet and from
-random numbers, and why you think that is.}
+\begin{center}\picturefile[0.5\linewidth]{figures/scratch_confusion.png}\end{center}
 
-\fillin{How close training only the last layer gets to training all of them.}
+The difference between the ImageNet (100\%) and the Random (93.3\%) test scores
+is 6.7\%. I think the reason why the ImageNet test score was higher is because
+it learned from many other images that helped it recognize things like eyes,
+wings, capes, shapes, and more. This gave it a better chance of scoring higher
+than the random test because the random model does not have prior knowledge
+which could have helped in differentiating the toys. Additionally the random
+model only had 360 images to train with and could have learned to recognize the
+differences in the toys. Another reason could be that that model memorised the
+differences.
+
+The end result of training only the last layer was that it scored 2.2\% lower
+(97.8\% vs 100\%), by only training 1,539 of the total 11,178,051 parameters.
 
 \subsection*{Output of the runs}
 \outputfile{outputs/run_output.txt}
 \outputfile{outputs/scratch_output.txt}
 \outputfile{outputs/frozen_output.txt}
-% One more line like these for the setting you chose, named by its tag.
-\fillin{the output of the run with your own setting}
+\outputfile{outputs/bigLR_output.txt}
 
 % ---------------------------------------------------------------------------
 \section*{Problem 4. Cleaning}
 
 \subsection*{My rule}
-\fillin{Your rule, in one or two sentences, as you wrote it before you
-started.}
+Rule: toys that are in the box only, have other characters alongside my
+character (including human faces), wrong characters all together, and near
+duplicates are to be removed. Toys that are outside or near the box, only my
+character (or multiple images of my character), and human hands alone are okay
+to keep.
 
 \subsection*{Three kinds of junk}
-\fillin{Three kinds of junk, with one picture of each.}
+Packages / boxes (kirby\_figure/0001.jpg):
+\picturefile[0.3\linewidth]{figures/p4_kirby_0001_box.png}
 
-% For example: \picturefile[0.3\linewidth]{figures/junk_1.jpg}
+Many characters in the image aside from the selected character
+(kirby\_figure/0124.jpg):
+\picturefile[0.3\linewidth]{figures/p4_kirby_0124_many_characters.png}
+
+Wrong character altogether (kirby\_figure/0137.jpg):
+\picturefile[0.3\linewidth]{figures/p4_kirby_0137_wrong.png}
 
 \subsection*{What I removed}
 \outputfile{outputs/clean_count.txt}
 
-\fillin{How many near copies it found, and what you did with them.}
+Near copies found: I found 48 near copies. I first removed the ones that were
+counted as ``Junk'' and then kept exactly one from each of the duplicates.
 
-\fillin{Of the first 20 suspects in each class, how many you removed. Whether
-the suspects included junk you had missed, and whether you found junk it did
-not list.}
+Out of the first 20 suspects for each category, I removed 8 from Kirby, 15
+from Toothless, and 5 from Law. I missed one of the images for junk when it
+came to Law because I didn't see the leopard under him.
+
+\outputfile{outputs/suspects_removed.txt}
+
+Yes I found junk that the tool didn't show that went against my packaging rule.
+For instance, kirby\_figure/0001.jpg which I showed as a junk example for
+packages/boxes.
 
 \subsection*{Before and after cleaning}
 \outputfile{outputs/compare.txt}
 
-\fillin{The test accuracy and the accuracy on your new images, before and
-after. If a number went down, why you think it did.}
+When comparing the numbers for before and after the cleaning the number did
+not change it stayed the same with 76.7\% for the run when compared to the
+clean score of 76.7\%. The reason why I think the number did not move is
+because the junk I deleted was not something that the model used when
+differentiating my toys. A reason why I removed the boxes is because my toys do
+not have boxes in them.
 
 % ---------------------------------------------------------------------------
 \section*{Problem 5. Images from a new source}
 
-\fillin{Where your new images came from, and why you are sure none of them are
-among your downloads.}
+My images came from me, I took these pictures in my dorm room of toys I own.
+The reason why I'm sure they are not among the downloaded images is because I
+personally took these pictures and I reviewed all the pictures that were
+downloaded.
 
 \outputfile{outputs/overlap.txt}
 
-\fillin{The accuracy on your downloaded test set and on your new images, side
-by side.}
+The accuracy on my downloaded test set and on my new images:
 
-\fillin{Five mistakes it was confident about, with the pictures. For each one,
-what in the image you think pushed it the wrong way.}
+\begin{center}\small
+\begin{tabular}{llr}
+\toprule
+ & downloaded & my new images \\
+\midrule
+clean & 100\% & 76.7\% \\
+\bottomrule
+\end{tabular}
+\end{center}
 
-\fillin{What is different about your new images: background, lighting, angle,
-distance, what else is in the frame.}
+5 mistakes it made: Before stating the mistakes I want to say that only the
+first 2 images are confident mistakes of 70\% or higher while the rest are
+around the 50\% mark. As for the rotated images I want to point out again that
+the model got 3/10 when the images were stored sideways but 7/10 when retested
+upright.
+
+1. IMG\_2648.jpg (Guessed Toothless but was Law). The thing that pushed it
+away from Trafalgar Law is that this image wasn't showing his face.
+
+\picturefile[0.3\linewidth]{figures/p5_2648.png}
+
+2. IMG\_2650.jpg (Guessed Toothless but was Law).
+
+\sidebyside{figures/p5_2650_sideways.png}{what the model saw}
+           {figures/p5_2650_upright.png}{the image as it was taken}
+
+The reason why the model got them wrong was because the model saw the image
+sideways instead of its intended upright position.
+
+3. IMG\_2652.jpg (Guessed Toothless but was Law).
+
+\sidebyside{figures/p5_2652_sideways.png}{what the model saw}
+           {figures/p5_2652_upright.png}{the image as it was taken}
+
+The reason why the model got them wrong is exactly the same reason as number 2.
+
+4. IMG\_2645.jpg (Guessed Toothless but was Law). This image only shows part
+of his face, it could also be the color of his clothing.
+
+\picturefile[0.3\linewidth]{figures/p5_2645.png}
+
+5. IMG\_2701.jpg (Guessed Toothless but was Law).
+
+\sidebyside{figures/p5_2701_sideways.png}{what the model saw}
+           {figures/p5_2701_upright.png}{what the intended image should have
+           looked like}
+
+The reason why the model got them wrong is exactly the same reason as number 2
+and 3.
+
+The main difference about my new images is that some of them were stored
+sideways on accident. Other things that I did to make my images different from
+the downloaded ones was take pictures from different angles and distances.
+Lastly, I took pictures with different backgrounds such as tables, near
+windows, on the bed, and with a dark background.
 
 % ---------------------------------------------------------------------------
 \section*{Problem 6. The demo}
 
-Address: \fillin{your GitHub Pages address}
+Address: \url{https://abukarhassan2222.github.io/mas1004-assignment1/}
 
-\fillin{What happens when you show it something that is none of your
-categories.}
+I gave it a picture of a glass of water with a white background and the
+answers it gave were all over the place with the highest percentage being
+50.2\% for Kirby.
 
 % ---------------------------------------------------------------------------
 \section*{Problem 7. What the model looks at}
@@ -138,25 +259,257 @@ categories.}
 % Copy this subsection once for every guess.
 \subsection*{Guess 1}
 
-\fillin{The guess, and what in your images or your model's mistakes made you
-think of it.}
+My guess: It tells a Trafalgar Law image from a Toothless or Kirby by his
+face/hat. Reasoning: from what I saw in the demo, Law's face is what the model
+uses to figure out it's him.
 
-\fillin{The change you chose, and why it tests the guess.}
+I would like to cover the images where Law's face shows to check if my guess
+is correct. This change will test my guess is because the model will need to
+use something else aside from his face to guess what the image is showing.
 
 My request to the agent, word for word:
 \begin{quote}
-\fillin{the request}
+make a copy of each image in data/new\_images/trafalgar\_law\_figure with the
+top third covered by a grey rectangle , and save the copies in
+data/changed/trafalgar\_law\_figure\_no\_head
 \end{quote}
 
-% One \sidebyside for every image you changed.
-\sidebyside{figures/guess1_original_1.jpg}{\fillin{original: the model's answer}}
-           {figures/guess1_changed_1.jpg}{\fillin{changed: the model's answer}}
+I noticed that the agent made a mistake with the copies that had the change in
+them, where it rotated them sideways. This could be because some of the photos
+were taken like that. So I gave the agent a new prompt.
 
-\fillin{What the results say about the guess.}
+Prompt:
+\begin{quote}
+the copies are wrong beacuse they were stored sideways so can you trun them
+upright like the orginals. also cover a little bit more than a third of the
+image and leave out photots where it doesnt cover the face
+\end{quote}
+
+After this prompt it did fix all the images that were sideways. But there were
+still some images that still had his face on it. So I gave cline another
+prompt to help with that.
+
+Prompt 3:
+\begin{quote}
+there are still some images that still has his face in them. IMG\_2650.jpg,
+IMG\_2651.jpg, IMG\_2652.jpg, IMG\_2653.jpg, IMG\_2695.jpg , IMG\_2701.jpg.
+can you cover another 10\% of each of these images with the grey rectangle but
+leave the rest untouched
+\end{quote}
+
+Now most of the images had his face covered except 2 which were images
+IMG\_2651.jpg and IMG\_2652.jpg. So I gave it another prompt.
+
+Prompt 4:
+\begin{quote}
+there are now 2 images left that still need a little more covering which are
+IMG\_2651.jpg and IMG\_2652.jpg. cover another 5\% of these images while
+leaving the rest as they are
+\end{quote}
+
+This worked and finally I have all the faces covered for law.
+
+While working on the demo I noticed that my numbers from question 5 did not
+add up to what I was seeing on the demo at all. In step 15, I found that the
+model only got 3/10 for law while my demo showed that it actually got 8/10
+right. The only thing that changed was that I rotated the copied images and
+retested them. This could mean that during step 15 the images that were
+guessed wrong were actually rotated sideways instead of being right up which
+could have contributed to such a low score.
+
+New prompt:
+\begin{quote}
+something isnt adding up when i ran the numbers with the demo compared to what
+I got for step 15. it turns out that the model actually gets 8/10 right when
+it comes to trafalgar law but earlier it showed 3/10. The only thing that was
+changed was the rotation of the images. so im wondering if prepare\_image
+turns the photos upright or leaves it as? and which photos were stored
+sideways. ONLY CHECK DONT CHANGE ANYTHING
+\end{quote}
+
+After that I prompted it again with:
+\begin{quote}
+ill keep the data and explain the rotation discrepancy in the report. can you
+save /tmp/check\_orientation\_test.py as a file in the and adding it into
+mas1004-assignment1. also save this test into this file too so it can be re
+run later so my professor can test it and get the same results
+\end{quote}
+
+\outputfile{outputs/check_orientation.txt}
+
+My conclusion. My initial guess showed that it's very likely that the model
+uses Law's face to tell him apart from Kirby and Toothless. I am pretty sure
+of it since the model went from 8/10 correct all the way down to 3/10 when I
+tested it on the demo.
+
+Law face vs no face:
+
+\begin{center}\footnotesize
+\begin{tabular}{l p{0.30\linewidth} p{0.42\linewidth}}
+\toprule
+Image & Model's confidence before change & Model's confidence after change \\
+\midrule
+IMG\_2644.jpg & 78.5\% law (model actually sees a little more than half his face) & 60.7\% law \\
+IMG\_2645.jpg & 48.5\% law (model actually sees half his face from an angle) & 56.4\% toothless and 32.1\% Law \\
+IMG\_2647.jpg & 37.7\% kirby, 31.3\% Law, and 31\% toothless (over head image with his round hat in the middle) & 59.9\% toothless, 25.9\% Law. The jump in toothless score could be due to the face/hat being covered and only relying on the color of the image which is similar to toothless because he is also black and blue in some images) \\
+IMG\_2648.jpg & 67.8\% toothless and 27.4\% law (this image is from behind so his face is not shown but his hair can be seen a little. Most of the image is his clothing which is again black and blue) & Interesting enough, toothless score went down to 52.7\% and law went down to 26.4 \\
+IMG\_2650.jpg & 86.3\% law (The image shows a higher angle but you can still see a small part of laws face) & Now the model thinks its kirby with a 51.2\% score while law has 13.5\% \\
+IMG\_2651.jpg & 90.3\% law (image is similar to the last one but it shows a little more of his face in this one) & 41.8\% for kirby and 37.3\% for law \\
+IMG\_2652.jpg & 99.1\% that its is law (the model can see laws full face) & With his face cut off the model shows a 56.3\% confidence its law \\
+IMG\_2653.jpg & 89.3\% that its law (model can see laws side profile including his hair and a little bit of his eye) & Model with his face cut off now shows a 48.1\% confidence that its law \\
+IMG\_2695.jpg & 95\% that its law (image sees his whole face) & With law's face cut off the model now shows a 40.5\% confidence that its toothless which was previously 0.9\% and law went down to 25.6\% \\
+IMG\_2701.jpg & 96.4\% that its law (model can see his whole face) & With his face cut off the model thinks its an image of kirby with 64.3\% confidence but its actually law \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Example 1: model is very confident that the image is 99.1\% its law but when I block his face the model loses 42.8\% confidence because
+of that change. Showing just how much that change affects the models choices.
+
+\sidebyside{figures/p7_2652_before.png}{original: 99.1\% Law}
+           {figures/p7_2652_after.png}{changed: 56.3\% Law}
+
+Example 2: the model has a 95\% confidence that the model shows Law. But, when
+I cover his face the model thinks its Toothless with a 40.5\% confidence and
+only a 25.6\% confidence for Law.
+
+\sidebyside{figures/p7_2695_before.png}{original: 95\% Law}
+           {figures/p7_2695_after.png}{changed: Toothless 40.5\%, Law 25.6\%}
+
+Example 3: the model shows a 96.4\% confidence in it being law. But, after
+covering his face the model shows a 64.3\% confidence that its Kirby instead.
+
+\sidebyside{figures/p7_2701_before.png}{original: 96.4\% Law}
+           {figures/p7_2701_after.png}{changed: Kirby 64.3\%}
+
+\sidebyside{figures/p7_2651_before.png}{original: 90.3\% Law}
+           {figures/p7_2651_after.png}{changed: Kirby 41.8\%, Law 37.3\%}
+
+\subsection*{Guess 2}
+
+I'd like to come back to my guess from problem one which was the color of each
+toy. Since Kirby and Toothless have very different colors I want to see if the
+model uses the colors of the images to tell them about.
+
+My request to the agent, word for word:
+\begin{quote}
+make a copy of each image in data/new\_images/toothless\_dragon\_toy and
+data/new\_images/kirby\_figure and turn the images grayscale , and save the
+copies in data/changed/kirby\_figure\_gray\_scale and
+data/changed/toothless\_dragon\_toy\_gray\_scale
+\end{quote}
+
+The model proved my guess wrong as it correctly guessed all the grayscale
+images of Kirby and Toothless.
+
+Kirby gray scaling test:
+
+\begin{center}\footnotesize
+\begin{tabular}{lrr}
+\toprule
+Image & Before & After \\
+\midrule
+IMG\_2654.jpg & 99.8\% kirby & 92.3\% kirby \\
+IMG\_2655.jpg & 98.5\% kirby & 89.8\% kirby \\
+IMG\_2656.jpg & 98.4\% kirby & 90.2\% kirby \\
+IMG\_2657.jpg & 99\% kirby & 97\% kirby \\
+IMG\_2658.jpg & 99.3\% kirby & 96.9\% kirby \\
+IMG\_2659.jpg & 94\% kirby & 78\% kirby \\
+IMG\_2660.jpg & 98.8\% kirby & 91.9\% kirby \\
+IMG\_2661.jpg & 98.5\% kirby & 86.3\% kirby \\
+IMG\_2694.jpg & 90.7\% kirby & 71.2\% kirby \\
+IMG\_2700.jpg & 91.1\% kirby & 69.6\% kirby \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+toothless gray scaling test:
+
+\begin{center}\footnotesize
+\begin{tabular}{lrr}
+\toprule
+Image & Before & After \\
+\midrule
+IMG\_2662.jpg & 100\% toothless & 100\% toothless \\
+IMG\_2664.jpg & 99.9\% toothless & 99.9\% toothless \\
+IMG\_2665.jpg & 99.7\% toothless & 99.5\% toothless \\
+IMG\_2666.jpg & 100\% toothless & 100\% toothless \\
+IMG\_2667.jpg & 98\% toothless & 98.8\% toothless \\
+IMG\_2668.jpg & 100\% toothless & 100\% toothless \\
+IMG\_2669.jpg & 99.9\% toothless & 99.8\% toothless \\
+IMG\_2670.jpg & 93.8\% toothless & 97.6\% toothless \\
+IMG\_2696.jpg & 99.8\% toothless & 99.9\% toothless \\
+IMG\_2699.jpg & 96.3\% toothless & 96.9\% toothless \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection*{Guess 3}
+
+I now want to try grayscaling Law because some of the images it confused with
+Kirby/Toothless could be due to his clothing (like his hat or pants).
+
+My request to the agent, word for word:
+\begin{quote}
+can you do the same grayscale to law as well? by making a copy of
+data/new\_images/trafalgar\_law\_figure and trun those images grayscale. then
+save the copies into data/changed/trafalgar\_law\_figure\_gray\_scale
+\end{quote}
+
+Law grayscale demo:
+
+\begin{center}\footnotesize
+\begin{tabular}{l p{0.30\linewidth} p{0.40\linewidth}}
+\toprule
+Image & Model's confidence before change & Model's confidence after change \\
+\midrule
+IMG\_2644.jpg & 78.5\% law (model actually sees a little more than half his face) & 51.4\% toothless and law at 40.1\% \\
+IMG\_2645.jpg & 48.5\% law (model actually sees half his face from an angle) & 70.4\% toothless and 20.6\% Law \\
+IMG\_2647.jpg & 37.7\% kirby, 31.3\% Law, and 31\% toothless (over head image with his round hat in the middle) & 60\% toothless, 25.1\% Law. The jump in toothless score could be because of the grayscaling \\
+IMG\_2648.jpg & 67.8\% toothless and 27.4\% law (this image is from behind so his face is not shown but his hair can be seen a little. Most of the image is his clothing which is again black and blue) & Interesting enough, toothless score went up to 93.5\% \\
+IMG\_2650.jpg & 86.3\% law (The image shows a higher angle but you can still see a small part of laws face) & Now the model thinks its law with a 54.4\% score \\
+IMG\_2651.jpg & 90.3\% law (image is similar to the last one but it shows a little more of his face in this one) & 83.4\% for law \\
+IMG\_2652.jpg & 99.1\% that its is law (the model can see laws full face) & Down to 96.3\% Law \\
+IMG\_2653.jpg & 89.3\% that its law (model can see laws side profile including his hair and a little bit of his eye) & 86.2\% law \\
+IMG\_2695.jpg & 95\% it is law (image sees his whole face) & 92.7\% law \\
+IMG\_2701.jpg & 96.4\% that it is law (model can see his whole face) & 93.0\% law \\
+\bottomrule
+\end{tabular}
+\end{center}
 
 \subsection*{What I now think the model uses}
-\fillin{What you now think the model uses to tell your categories apart, and
-how sure you are.}
+
+I believe the model uses face and shape features to determine which toy is
+which while color helps when the model's face is partially visible. I am
+pretty sure because when I tested my hypothesis about the model using facial
+features I used my law images which was the toy the model had the most trouble
+with compared to the other toys (Toothless and Kirby) where the model got
+100\% accuracy on. Which leads me to believe that there is something in the
+images of Law that was confusing the model. The differences I found between
+Law and the other figures was that Law had a hat on which partially covered
+his face in certain angles and that his color was slightly less distinct from
+Kirby who is almost fully pink/red and toothless who is fully black. When I
+tested my hypothesis by putting a grey box over law's face the model guessed
+3/10 correctly as law which is different from when the model got 8/10 (demo
+test) with his face showing. I then tested my other hypothesis about color in
+which the model got 100\% again on toothless and Kirby, but not law. I looked
+through the images and found that the images that partially showed his face
+but not the whole thing were confused as toothless and not Kirby which could
+be due to grayscaling turning Law black just like toothless. But, there were
+some results from the demo where I cut law's face off where the model thought
+it was Kirby. This could be due to the shape of the toy instead of either the
+color or the faces.
+
+Finally, I would like to talk about some findings I found during problem 7.
+When testing out if the demo worked correctly I noticed that the numbers I was
+getting and the numbers from my first test were different even when I used the
+same images. This led me to finding out that my original score of 3/10 was
+largely due to the sideways images. I then retested the images and got 7/10 on
+the terminal and 8/10 on the demo. This is because python and the web browser
+resize images differently which changed the outcome of one image. This caused the inconsistency in my results between the terminal and the demo. The face covered demo shows 3/10 answers correct while the changed copies under check orientation show a result of 2/10.  I decided to
+keep those numbers and talk about my findings and mishaps. Nevertheless, this
+did not affect the models answers during my demos since all the images were
+upright throughout the demos.
 
 % ---------------------------------------------------------------------------
 \section*{Appendix. Output of check.py}

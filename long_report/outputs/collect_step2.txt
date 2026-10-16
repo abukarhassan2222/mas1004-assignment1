@@ -1,0 +1,14 @@
+  duckduckgo stopped at page 1: No results found.
+"Kirby figure": search returned 368 links, downloading...
+"Kirby figure": kept 150 images in data/raw/kirby_figure
+  duckduckgo stopped at page 1: No results found.
+"Toothless dragon toy": search returned 357 links, downloading...
+"Toothless dragon toy": kept 150 images in data/raw/toothless_dragon_toy
+  duckduckgo stopped at page 1: No results found.
+"Trafalgar Law figure": search returned 373 links, downloading...
+"Trafalgar Law figure": kept 150 images in data/raw/trafalgar_law_figure
+
+Summary
+  Kirby figure                   150
+  Toothless dragon toy           150
+  Trafalgar Law figure           150

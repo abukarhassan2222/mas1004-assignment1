@@ -1,0 +1,39 @@
+--- as stored (what check.py feeds) ---
+  IMG_2644.jpg     -> trafalgar_law_figure     OK
+  IMG_2645.jpg     -> toothless_dragon_toy     WRONG
+  IMG_2647.jpg     -> kirby_figure             WRONG
+  IMG_2648.jpg     -> toothless_dragon_toy     WRONG
+  IMG_2650.jpg     -> toothless_dragon_toy     WRONG
+  IMG_2651.jpg     -> trafalgar_law_figure     OK
+  IMG_2652.jpg     -> toothless_dragon_toy     WRONG
+  IMG_2653.jpg     -> toothless_dragon_toy     WRONG
+  IMG_2695.jpg     -> trafalgar_law_figure     OK
+  IMG_2701.jpg     -> toothless_dragon_toy     WRONG
+as stored (what check.py feeds): 3/10
+
+--- upright (what the browser feeds) ---
+  IMG_2644.jpg     -> trafalgar_law_figure     OK
+  IMG_2645.jpg     -> toothless_dragon_toy     WRONG
+  IMG_2647.jpg     -> kirby_figure             WRONG
+  IMG_2648.jpg     -> toothless_dragon_toy     WRONG
+  IMG_2650.jpg     -> trafalgar_law_figure     OK
+  IMG_2651.jpg     -> trafalgar_law_figure     OK
+  IMG_2652.jpg     -> trafalgar_law_figure     OK
+  IMG_2653.jpg     -> trafalgar_law_figure     OK
+  IMG_2695.jpg     -> trafalgar_law_figure     OK
+  IMG_2701.jpg     -> trafalgar_law_figure     OK
+upright (what the browser feeds): 7/10
+
+--- changed copies (upright + grey band) ---
+  IMG_2644.jpg     -> trafalgar_law_figure     OK
+  IMG_2645.jpg     -> toothless_dragon_toy     WRONG
+  IMG_2647.jpg     -> toothless_dragon_toy     WRONG
+  IMG_2648.jpg     -> toothless_dragon_toy     WRONG
+  IMG_2650.jpg     -> kirby_figure             WRONG
+  IMG_2651.jpg     -> kirby_figure             WRONG
+  IMG_2652.jpg     -> trafalgar_law_figure     OK
+  IMG_2653.jpg     -> kirby_figure             WRONG
+  IMG_2695.jpg     -> toothless_dragon_toy     WRONG
+  IMG_2701.jpg     -> kirby_figure             WRONG
+changed copies: 2/10
+

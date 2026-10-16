@@ -1,0 +1,30 @@
+reading /Users/abukarhassan/Documents/mas1004-assignment1/data/clean
+450 images, 3 classes, read in 5 s
+  kirby_figure             150
+  toothless_dragon_toy     150
+  trafalgar_law_figure     150
+training on 360, testing on 90
+model has 11,178,051 parameters, 11,178,051 of them will be trained
+epoch   1/10: train_loss 1.8205 train_acc 0.403  test_loss 33854.7734 test_acc 0.333
+epoch   2/10: train_loss 1.1438 train_acc 0.456  test_loss 24.7360 test_acc 0.389
+epoch   3/10: train_loss 1.0512 train_acc 0.469  test_loss 40.9118 test_acc 0.444
+epoch   4/10: train_loss 0.8548 train_acc 0.569  test_loss 50.5451 test_acc 0.411
+epoch   5/10: train_loss 0.8395 train_acc 0.603  test_loss 0.6427 test_acc 0.644
+epoch   6/10: train_loss 0.7308 train_acc 0.603  test_loss 0.6356 test_acc 0.622
+epoch   7/10: train_loss 0.6734 train_acc 0.586  test_loss 0.5796 test_acc 0.622
+epoch   8/10: train_loss 0.7045 train_acc 0.589  test_loss 0.5760 test_acc 0.644
+epoch   9/10: train_loss 0.6358 train_acc 0.600  test_loss 0.5651 test_acc 0.633
+epoch  10/10: train_loss 0.6660 train_acc 0.675  test_loss 0.7127 test_acc 0.700
+
+trained in 3.0 minutes
+train accuracy 68.1%
+test  accuracy 70.0%
+wrote /Users/abukarhassan/Documents/mas1004-assignment1/results/bigLR_curves.png
+wrote /Users/abukarhassan/Documents/mas1004-assignment1/results/bigLR_confusion.png
+worst_examples is not written yet (Problem 5), so there is no bigLR_worst.png this time
+wrote /Users/abukarhassan/Documents/mas1004-assignment1/results/bigLR_model.pt
+
+One line for your experiment table:
+| bigLR | ImageNet | all layers | 10 | 0.01 | 11,178,051 | 68.1% | 70.0% |
+
+To put this model on your web page: python src/export_web.py --tag bigLR

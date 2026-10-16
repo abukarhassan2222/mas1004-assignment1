@@ -1,0 +1,12 @@
+class                    downloaded  removed   kept  other
+kirby_figure                    150       53     97      0
+toothless_dragon_toy            150       83     67      0
+trafalgar_law_figure            150       39    111      0
+
+reasons
+    82  packaging / box
+    48  near duplicate
+    44  other characters or people
+     1  wrong character
+
+"other" is images that are in data/raw but neither in data/clean nor removed with `clean.py remove`, for example ones you deleted by hand. Their reasons are not recorded.

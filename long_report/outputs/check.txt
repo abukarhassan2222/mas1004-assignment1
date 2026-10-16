@@ -1,0 +1,50 @@
+MAS1004 Assignment 1, checking your work
+
+Training images  (/Users/abukarhassan/Documents/mas1004-assignment1/data/clean)
+-------------------------------------------------------------------------------
+  kirby_figure                    97 images
+  toothless_dragon_toy            67 images
+  trafalgar_law_figure           111 images
+
+Your images from a new source  (/Users/abukarhassan/Documents/mas1004-assignment1/data/new_images)
+--------------------------------------------------------------------------------------------------
+  kirby_figure                    10 images
+  toothless_dragon_toy            10 images
+  trafalgar_law_figure            10 images
+
+The same image appearing twice
+------------------------------
+  ok       no file appears twice byte for byte. Near copies (the same picture resized or re-saved) are only found by `python src/clean.py suspects` and `python src/clean.py overlap`.
+
+The model you exported for the web page
+---------------------------------------
+  ok       3 classes: kirby_figure, toothless_dragon_toy, trafalgar_law_figure
+  ok       model.onnx is 44.8 MB, 11,178,051 parameters
+           input [1, 3, 224, 224], prepared as: shorter side 256, centre 224 x 224, mean [0.485, 0.456, 0.406], std [0.229, 0.224, 0.225]
+
+Does the exported model give the answers Python gave?
+-----------------------------------------------------
+  ok       yes, they agree (largest gap 0.0000)
+
+Your images from a new source  (/Users/abukarhassan/Documents/mas1004-assignment1/data/new_images)
+--------------------------------------------------------------------------------------------------
+
+  accuracy on your new images: 23/30 = 76.7%
+
+  rows are what it really is, columns are what the model said
+                           kirby_fi toothles trafalga
+    kirby_figure                 10        0        0
+    toothless_dragon_toy          0       10        0
+    trafalgar_law_figure          1        6        3
+
+  the mistakes it was most sure about:
+    IMG_2648.jpg                 said toothless_dragon_toy (74%), really trafalgar_law_figure
+    IMG_2650.jpg                 said toothless_dragon_toy (74%), really trafalgar_law_figure
+    IMG_2652.jpg                 said toothless_dragon_toy (53%), really trafalgar_law_figure
+    IMG_2645.jpg                 said toothless_dragon_toy (51%), really trafalgar_law_figure
+    IMG_2701.jpg                 said toothless_dragon_toy (47%), really trafalgar_law_figure
+
+Summary
+-------
+  nothing is broken
+

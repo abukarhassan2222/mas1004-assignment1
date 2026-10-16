@@ -1,0 +1,4 @@
+first 20 suspects per category that are removed (in data/raw but not in data/clean)
+kirby_figure             8 of 20
+toothless_dragon_toy     15 of 20
+trafalgar_law_figure     5 of 20
